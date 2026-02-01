@@ -10,18 +10,24 @@ body {
   height: 100vh;
 }
 
+/* TERMINAL */
 #terminal {
-  padding: 20px;
-  height: 100%;
+  padding: 16px;
+  height: 100vh;
   overflow-y: auto;
+  cursor: text;
 }
 
+/* INPUT LINE */
 .input-line {
   display: flex;
+  align-items: center;
+  font-size: 16px; /* default desktop */
 }
 
 #prompt {
-  margin-right: 8px;
+  margin-right: 6px;
+  white-space: nowrap;
 }
 
 #command {
@@ -31,9 +37,26 @@ body {
   outline: none;
   width: 100%;
   font-family: monospace;
+  font-size: 16px;
 }
 
+/* OUTPUT */
 pre {
   margin: 0;
   white-space: pre-wrap;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* 📱 MOBILE OPTIMIZATION */
+@media (max-width: 768px) {
+  #terminal {
+    padding: 12px;
+  }
+
+  .input-line,
+  #command,
+  pre {
+    font-size: 18px; /* BIKIN GEDE */
+  }
 }

@@ -76,8 +76,11 @@ function updatePrompt() {
 }
 
 function print(text = "") {
-  output.innerHTML += `<pre>${text}</pre>`;
-  window.scrollTo(0, document.body.scrollHeight);
+  output.insertAdjacentHTML("beforeend", `<pre>${text}</pre>`);
+  requestAnimationFrame(() => {
+    output.parentElement.scrollTop =
+      output.parentElement.scrollHeight;
+  });
 }
 
 function resolvePath(path) {
@@ -186,38 +189,41 @@ function catFile(file) {
 }
 
 /* =====================
-   AUTOCOMPLETE (TAB)
+   AUTOCOMPLETE
 ===================== */
 function autocomplete() {
-  const value = input.value;
-  const parts = value.split(" ");
+  const parts = input.value.split(" ");
 
-  // command autocomplete
   if (parts.length === 1) {
     const match = commands.filter(c => c.startsWith(parts[0]));
-    if (match.length === 1) {
-      input.value = match[0] + " ";
-    }
+    if (match.length === 1) input.value = match[0] + " ";
   }
 
-  // file / dir autocomplete
   if (parts.length === 2) {
     const options = Object.keys(currentDir);
     const match = options.filter(o => o.startsWith(parts[1]));
-    if (match.length === 1) {
+    if (match.length === 1)
       input.value = parts[0] + " " + match[0];
-    }
   }
 }
 
 /* =====================
-   INPUT LISTENER
+   INIT
 ===================== */
 updatePrompt();
 print("Type 'help' or 'neofetch'");
+input.focus();
 
+/* =====================
+   INPUT LISTENER
+===================== */
 input.addEventListener("keydown", e => {
-  // ENTER
+  // auto scroll while typing
+  requestAnimationFrame(() => {
+    output.parentElement.scrollTop =
+      output.parentElement.scrollHeight;
+  });
+
   if (e.key === "Enter") {
     const cmd = input.value.trim();
     if (!cmd) return;
@@ -229,15 +235,14 @@ input.addEventListener("keydown", e => {
     historyIndex = history.length;
 
     input.value = "";
+    input.focus();
   }
 
-  // TAB
   if (e.key === "Tab") {
     e.preventDefault();
     autocomplete();
   }
 
-  // HISTORY UP
   if (e.key === "ArrowUp") {
     if (historyIndex > 0) {
       historyIndex--;
@@ -245,7 +250,6 @@ input.addEventListener("keydown", e => {
     }
   }
 
-  // HISTORY DOWN
   if (e.key === "ArrowDown") {
     if (historyIndex < history.length - 1) {
       historyIndex++;
@@ -256,7 +260,7 @@ input.addEventListener("keydown", e => {
   }
 });
 
-
-document.addEventListener("click", () => {
-  input.focus();
-});
+/* =====================
+   FORCE FOCUS
+===================== */
+document.addEventListener("click", () => input.focus());
