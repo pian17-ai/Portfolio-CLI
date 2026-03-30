@@ -40,7 +40,7 @@ Built with HTML, CSS, JS
 
     "about.txt": `
 Hi, I'm Pian.
-Web Developer & Linux Engineering.
+Software Engineering & Linux Engineering.
     `,
 
     "contact.txt": `
@@ -72,7 +72,7 @@ const prompt = document.getElementById("prompt");
    HELPER
 ===================== */
 function updatePrompt() {
-  prompt.textContent = `pian@portfolio:${currentPath}$`;
+  prompt.textContent = `pian@cli:${currentPath}$`;
 }
 
 function print(text = "") {
@@ -127,6 +127,10 @@ Commands:
     case "clear":
       output.innerHTML = "";
       break;
+
+    case "kella":
+      print(`U2FsdGVkX19vzsUTsuNNVEB8okLiH0mfcsvU4PJo8V2xYi1fImzFMcUUheAm+EFir/DmeCe1Fc4517BJg3E71sUYb9XS3t+oeXytbQLlThk=`);
+        break;
 
     case "neofetch":
       print(`
