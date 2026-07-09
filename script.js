@@ -14,7 +14,8 @@ const fs = {
 - HTML
 - Tailwind CSS
 - JavaScript DOM
-- React (Basic)
+- React
+- Next JS
       `,
       "tools.txt": `
 - Git & GitHub
@@ -140,7 +141,7 @@ Commands:
         .lllll.          ​ Kernel : arch1-1
        ..;'olll.         ​ WM : Hyprland 
       .dolllcccl.        ​ Shell : fish
-     .lcc'   'ccc.       ​ Uptime : 16 years
+     .lcc'   'ccc.       ​ Uptime : 17 years
     .ccc'     'cc:.      ​ Wife : Nagisa Kubo
    .cccc'     'c:;..    └────────────────────────────────┘ 
   ."'             '".    I     U s e     A r c h    B t w  
